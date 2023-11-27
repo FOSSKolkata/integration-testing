@@ -8,9 +8,10 @@ namespace TennisBookings.Merchandise.Api.Data
         {
             var allowedCategories = new string[]
             {
-                "Accessories",
+               
                 "Bags",
                 "Balls",
+                 "Accessories",
                 "Clothing",
                 "Rackets"
             };
