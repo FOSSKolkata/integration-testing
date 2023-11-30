@@ -11,29 +11,29 @@ namespace TennisBookings.Mercandise.Api.IntegrationTests.Controllers
             _client = factory.CreateDefaultClient(new Uri("http://localhost/api/stock/"));
         }
 
-        [Fact]
-        public async Task GetStockTotal_ReturnsSuccessStatusCode()
-        {
-            var response = await _client.GetAsync("total");
+        //[Fact]
+        //public async Task GetStockTotal_ReturnsSuccessStatusCode()
+        //{
+        //    var response = await _client.GetAsync("total");
 
-            response.EnsureSuccessStatusCode();
-        }
+        //    response.EnsureSuccessStatusCode();
+        //}
 
-        [Fact]
-        public async Task GetStockTotal_ReturnsExpectedJsonContentString()
-        {
-            var response = await _client.GetStringAsync("total");
+        //[Fact]
+        //public async Task GetStockTotal_ReturnsExpectedJsonContentString()
+        //{
+        //    var response = await _client.GetStringAsync("total");
 
-            Assert.Equal("{\"stockItemTotal\":100}", response);
-        }
+        //    Assert.Equal("{\"stockItemTotal\":100}", response);
+        //}
 
-        [Fact]
-        public async Task GetStockTotal_ReturnsExpectedJsonContentType()
-        {
-            var response = await _client.GetAsync("total");
+        //[Fact]
+        //public async Task GetStockTotal_ReturnsExpectedJsonContentType()
+        //{
+        //    var response = await _client.GetAsync("total");
 
-            Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
-        }
+        //    Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
+        //}
 
         [Fact]
         public async Task GetStockTotal_ReturnsExpectedJson() {
@@ -41,6 +41,14 @@ namespace TennisBookings.Mercandise.Api.IntegrationTests.Controllers
 
             Assert.NotNull(model);
             Assert.True(model.StockItemTotal > 0);
+        }
+
+        [Fact]
+        public async Task GetStockTotal_ReturnsExpectedStockQuantity()
+        {
+            var model = await _client.GetFromJsonAsync<ExpectedStockTotalOutputModel>("total");
+
+            Assert.Equal(100, model.StockItemTotal);
         }
     }
 }
